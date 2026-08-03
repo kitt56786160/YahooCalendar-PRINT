@@ -1,0 +1,17 @@
+/* Yahoo!カレンダー 印刷最適化 拡張機能 - print.css */
+/* このCSSは通常表示には影響しません。印刷時のYahoo標準UIを抑制します。 */
+
+@media print {
+  /* Yahoo!カレンダー標準のUI要素をすべて非表示 */
+  #msthd,
+  #TEMPLA_MH_VDOM,
+  #TEMPLA_MHCSS,
+  #TEMPLA_EMG,
+  #TEMPLA_EMG2_VDOM,
+  #TEMPLA_EMG3_VDOM,
+  ._pc-wrapper_48mly_19,
+  .mhd-container,
+  footer {
+    display: none !important;
+  }
+}

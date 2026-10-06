@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Yahoo!カレンダー印刷</title>
+  <link rel="stylesheet" href="print-page.css">
+</head>
+<body>
+  <div class="edit-bar" role="toolbar" aria-label="メモの書式設定">
+    <button id="print-page" class="btn-print">🖨️ 印刷</button>
+    <button id="close-page" class="btn-close">閉じる</button>
+    <span class="toolbar-divider"></span>
+    <button type="button" data-style="bold" title="太字"><strong>B</strong></button>
+    <button type="button" data-style="italic" title="斜体"><em>I</em></button>
+    <button type="button" data-style="underline" title="下線"><u>U</u></button>
+    <select id="memo-font-size" aria-label="文字サイズ">
+      <option value="10pt">10 pt</option><option value="12pt" selected>12 pt</option><option value="14pt">14 pt</option><option value="18pt">18 pt</option><option value="24pt">24 pt</option>
+    </select>
+    <label class="toolbar-field" for="memo-line-height">行間
+      <select id="memo-line-height" aria-label="行間隔">
+        <option value="1">1.0</option><option value="1.2">1.2</option><option value="1.4">1.4</option><option value="1.6" selected>1.6</option><option value="1.8">1.8</option><option value="2">2.0</option>
+      </select>
+    </label>
+    <span class="toolbar-divider"></span>
+    <label class="toolbar-field range-field" for="calendar-row-height">枠高さ
+      <input id="calendar-row-height" type="range" min="16" max="32" step="1" value="22" aria-label="カレンダーの枠高さ">
+      <output id="calendar-row-height-value" for="calendar-row-height">22 mm</output>
+    </label>
+    <span class="edit-help">太字などは文字を選択して設定します。行間はメモ全体、枠高さは予定が少ない週の最低高さに適用されます。</span>
+  </div>
+  <main id="print-sheet" class="print-sheet" hidden>
+    <h1 id="month-title"></h1>
+    <div id="calendar-root"></div>
+    <section id="memo-area" class="memo-area"><div id="memo-editor" class="memo-editor" contenteditable="true" spellcheck="false" data-placeholder="ここにメモを入力してください"></div></section>
+    <div id="print-footer" class="print-footer"></div>
+  </main>
+  <div id="error-message" class="error-message" hidden></div>
+  <div id="memo-context-menu" class="context-menu" hidden>
+    <button id="context-copy" type="button">コピー</button>
+    <button id="context-paste" type="button">貼り付け</button>
+  </div>
+  <script src="print-page.js"></script>
+</body>
+</html>

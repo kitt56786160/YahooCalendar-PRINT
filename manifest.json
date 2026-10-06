@@ -1,28 +1,17 @@
 {
   "manifest_version": 3,
-  "name": "Yahoo!カレンダー 印刷最適化",
-  "version": "1.0",
-  "description": "Yahoo!カレンダーの月表示をA4用紙1枚に予定付きで印刷します",
-  "permissions": ["activeTab", "scripting"],
-  "host_permissions": [
-    "https://calendar.yahoo.co.jp/*"
-  ],
+  "name": "Yahoo!カレンダー印刷",
+  "version": "2.2",
+  "description": "Yahoo!カレンダーの月表示をA4用紙に見やすく印刷し、下側にメモ欄を作成します。",
+  "permissions": ["activeTab", "scripting", "storage", "clipboardRead"],
+  "optional_permissions": ["clipboardWrite"],
+  "host_permissions": ["https://calendar.yahoo.co.jp/*"],
   "action": {
     "default_popup": "popup.html",
-    "default_icon": {
-      "16": "icon16.png",
-      "48": "icon48.png"
-    }
+    "default_icon": { "16": "icon16.png", "48": "icon48.png" }
   },
   "content_scripts": [
-    {
-      "matches": ["https://calendar.yahoo.co.jp/*"],
-      "css": ["print.css"],
-      "run_at": "document_end"
-    }
+    { "matches": ["https://calendar.yahoo.co.jp/*"], "css": ["print.css"], "run_at": "document_end" }
   ],
-  "icons": {
-    "16": "icon16.png",
-    "48": "icon48.png"
-  }
+  "icons": { "16": "icon16.png", "48": "icon48.png" }
 }

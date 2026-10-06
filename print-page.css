@@ -1,0 +1,50 @@
+@page { size: A4 portrait; margin: 10mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: #eee; }
+body { width: 190mm; margin: 0 auto; color: #222; background: #fff; font-family: "Hiragino Kaku Gothic ProN", "Meiryo", "Yu Gothic", sans-serif; }
+.edit-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 7px; width: 190mm; margin: 0 auto; padding: 10px; background: #fff; border-bottom: 1px solid #ddd; }
+.edit-bar button, .edit-bar select { height: 32px; border: 1px solid #aaa; border-radius: 4px; background: #fff; color: #222; font-size: 13px; cursor: pointer; }
+.edit-bar button { min-width: 32px; padding: 0 10px; font-weight: bold; }
+.edit-bar button:hover, .edit-bar button.active { background: #f5d8de; border-color: #cc0028; }
+.edit-bar .btn-print { background: #cc0028; border-color: #cc0028; color: #fff; }
+.edit-bar .btn-print:hover { background: #a8001f; }
+.edit-bar .btn-close { background: #eee; }
+.toolbar-divider { width: 1px; height: 24px; background: #ccc; }
+.toolbar-field { display: inline-flex; align-items: center; gap: 5px; color: #444; font-size: 13px; }
+.toolbar-field select { min-width: 62px; }
+.range-field input[type="range"] { width: 130px; accent-color: #cc0028; cursor: pointer; }
+.range-field output { min-width: 43px; color: #444; font-variant-numeric: tabular-nums; }
+.edit-help { width: 100%; text-align: center; color: #666; font-size: 11px; }
+.print-sheet { height: 277mm; display: flex; flex-direction: column; gap: 3mm; overflow: hidden; }
+.print-sheet[hidden] { display: none; }
+h1 { flex: none; text-align: center; font-size: 15pt; font-weight: bold; color: #cc0028; letter-spacing: .1em; }
+#calendar-root { flex: none; }
+.cal-table { --calendar-row-height: 22mm; width: 100%; border-collapse: collapse; table-layout: fixed; }
+.cal-table th { text-align: center; font-size: 9pt; font-weight: bold; padding: 4px 2px; border: 1px solid #999; color: #fff; }
+.cal-table th.sun { background: #cc0028; } .cal-table th.sat { background: #1a44cc; } .cal-table th.weekday { background: #555; }
+.cal-table td { height: var(--calendar-row-height); width: calc(100% / 7); padding: 3px 4px; border: 1px solid #ccc; vertical-align: top; overflow: hidden; }
+.day-cell { background: #fff; } .day-cell.sun { background: #fff3f3; } .day-cell.sat { background: #f0f4ff; } .day-cell.other-month { background: #f5f5f5; opacity: .65; }
+.day-header { display: flex; align-items: center; gap: 3px; margin-bottom: 2px; padding-bottom: 2px; border-bottom: 1px solid #eee; }
+.day-num { min-width: 18px; text-align: center; font-size: 10pt; font-weight: bold; }
+.day-cell.sun .day-num { color: #cc0028; } .day-cell.sat .day-num { color: #1a44cc; }
+.day-cell.today .day-num { display: inline-flex; width: 18px; height: 18px; align-items: center; justify-content: center; color: #fff; background: #cc0028; border-radius: 50%; }
+.rokuyo { color: #999; font-size: 6pt; }
+.event-list { list-style: none; }
+.event-list li { overflow: hidden; margin-bottom: 1px; padding: 1px 3px; border-left: 2px solid #ff8888; border-radius: 1px; background: #fff0f0; color: #333; font-size: 7pt; line-height: 1.3; white-space: nowrap; text-overflow: ellipsis; }
+.ev-time { margin-right: 2px; color: #cc0028; font-size: 6.5pt; font-weight: bold; }
+.memo-area { display: block; flex: none; min-height: 0; overflow: hidden; }
+.memo-editor { width: 100%; height: 100%; overflow: hidden; outline: none; font-size: 12pt; line-height: 1.6; white-space: pre-wrap; }
+.memo-editor:empty::before { content: attr(data-placeholder); color: #999; pointer-events: none; }
+.print-footer { flex: none; text-align: right; color: #bbb; font-size: 7pt; }
+.error-message { margin: 30px; padding: 20px; color: #a8001f; background: #fff0f0; border: 1px solid #cc0028; }
+.context-menu { position: fixed; z-index: 1000; min-width: 120px; padding: 5px; background: #fff; border: 1px solid #aaa; border-radius: 5px; box-shadow: 0 3px 12px #0003; }
+.context-menu[hidden] { display: none; }
+.context-menu button { display: block; width: 100%; padding: 7px 14px; border: 0; background: #fff; text-align: left; font-size: 13px; cursor: pointer; }
+.context-menu button:hover { background: #f5d8de; }
+.context-menu button:disabled { color: #aaa; background: #fff; cursor: default; }
+@media print {
+  html { background: #fff; }
+  body { width: 190mm; margin: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .edit-bar, .context-menu { display: none !important; }
+  .memo-editor:empty::before { content: ''; }
+}

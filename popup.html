@@ -2,56 +2,21 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Yahoo!カレンダー 印刷</title>
+  <title>Yahoo!カレンダー印刷</title>
   <style>
-    body {
-      font-family: "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
-      width: 220px;
-      padding: 16px;
-      margin: 0;
-      background: #fff;
-    }
-    h2 {
-      font-size: 14px;
-      margin: 0 0 12px;
-      color: #333;
-      border-bottom: 2px solid #ff0033;
-      padding-bottom: 6px;
-    }
-    p {
-      font-size: 12px;
-      color: #555;
-      margin: 0 0 14px;
-      line-height: 1.6;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      background: #ff0033;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-      letter-spacing: 0.05em;
-    }
-    button:hover {
-      background: #cc0028;
-    }
-    .note {
-      margin-top: 10px;
-      font-size: 11px;
-      color: #888;
-      line-height: 1.5;
-    }
+    body { font-family: "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif; width: 270px; padding: 16px; margin: 0; background: #fff; }
+    h2 { font-size: 14px; margin: 0 0 12px; color: #333; border-bottom: 2px solid #ff0033; padding-bottom: 6px; }
+    p { font-size: 12px; color: #555; margin: 0 0 14px; line-height: 1.6; }
+    button { width: 100%; padding: 10px; background: #ff0033; color: white; border: none; border-radius: 6px; font-size: 14px; font-weight: bold; cursor: pointer; letter-spacing: .05em; }
+    button:hover { background: #cc0028; }
+    .note { margin-top: 10px; font-size: 11px; color: #888; line-height: 1.5; }
   </style>
 </head>
 <body>
-  <h2>📅 印刷最適化</h2>
-  <p>月カレンダーに予定を統合して、A4用紙1枚にきれいに印刷します。</p>
-  <button id="printBtn">🖨️ 印刷プレビューを開く</button>
-  <p class="note">※ Yahoo!カレンダーの月表示ページで使用してください。</p>
+  <h2>Yahoo!カレンダー印刷</h2>
+  <p>カレンダーを確認しながら、印刷プレビュー内のメモ欄へ文字を入力・編集できます。</p>
+  <button id="printBtn">メモ編集・印刷画面を開く</button>
+  <p class="note">Yahoo!カレンダーの月表示ページで使用してください。</p>
   <script src="popup.js"></script>
 </body>
 </html>

@@ -34,6 +34,31 @@ function generateAndOpenPrintPage() {
 
   const eventsByDate = {};
 
+  // ★ 予定ごとにYahoo!カレンダーで設定された色を取得
+  const isTransparent = c =>
+    !c || c === 'transparent' ||
+    /^rgba\([^,]+,[^,]+,[^,]+,\s*0(\.0+)?\)$/.test(c) || /\/\s*0(\.0+)?\)$/.test(c);
+
+  function getEventColors(el) {
+    const root = el.closest('.fc-event, .fc-daygrid-event-harness') || el;
+    const fg = getComputedStyle(el).color;
+
+    // タイトル要素から予定要素まで遡り、最初に見つかった背景色を採用
+    for (let node = el; node; node = node.parentElement) {
+      const bg = getComputedStyle(node).backgroundColor;
+      if (!isTransparent(bg)) return { bg, fg };
+      if (node === root) break;
+    }
+
+    // 背景なし（ドット表示）の予定はドットの色を左線に使う
+    const dot = root.querySelector('.fc-daygrid-event-dot');
+    if (dot) {
+      const accent = getComputedStyle(dot).borderColor;
+      if (!isTransparent(accent)) return { accent };
+    }
+    return null;   // 取得できなければ従来のピンク
+  }
+
   dayCells.forEach(cell => {
     const dateStr = cell.getAttribute('data-date');
     const dayLabel = cell.querySelector('.fc-daygrid-day-number');
@@ -53,7 +78,7 @@ function generateAndOpenPrintPage() {
       const timeEl = el.querySelector('._event-time-inline_1q9lx_229');
       const timeText = timeEl ? timeEl.textContent.trim() : '';
       let title = el.textContent.replace(timeText, '').trim();
-      events.push({ time: timeText, title: title });
+      events.push({ time: timeText, title: title, colors: getEventColors(el) });
     });
 
     eventsByDate[dateStr] = {
@@ -108,7 +133,14 @@ function generateAndOpenPrintPage() {
         eventsHTML = '<ul class="event-list">' +
           d.events.map(ev => {
             const timeStr = ev.time ? `<span class="ev-time">${ev.time}</span>` : '';
-            return `<li>${timeStr}${ev.title}</li>`;
+            const c = ev.colors;
+            let liAttr = '';
+            if (c && c.bg) {
+              liAttr = ` class="custom-color" style="background:${c.bg};color:${c.fg};border-left-color:${c.bg};"`;
+            } else if (c && c.accent) {
+              liAttr = ` style="border-left-color:${c.accent};"`;
+            }
+            return `<li${liAttr}>${timeStr}${ev.title}</li>`;
           }).join('') +
           '</ul>';
       }
@@ -292,6 +324,8 @@ function generateAndOpenPrintPage() {
     margin-right: 2px;
     font-size: 6.5pt;
   }
+  /* ★ 予定の背景色を使う場合、時刻は予定の文字色に合わせる */
+  .event-list li.custom-color .ev-time { color: inherit; }
 
   .print-footer {
     text-align: right;

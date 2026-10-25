@@ -39,6 +39,9 @@ h1 { flex: none; text-align: center; font-size: 15pt; font-weight: bold; color: 
 .ev-title { font-weight: 500; }
 .ev-comment { display: none; margin-top: 1.5px; padding-top: 1.5px; border-top: 1px dashed rgba(204, 0, 40, 0.25); color: #555; font-size: 6pt; line-height: 1.25; white-space: pre-wrap; word-break: break-all; }
 .event-item.show-comment .ev-comment { display: block !important; }
+/* 予定の背景色を使う場合、時刻・コメントは予定の文字色に合わせる */
+.event-item.custom-color .ev-time, .event-item.custom-color .comment-badge, .event-item.custom-color .ev-comment { color: inherit; }
+.event-item.custom-color .ev-comment { border-top-color: currentColor; opacity: .85; }
 .memo-area { display: block; flex: none; min-height: 0; overflow: hidden; }
 .memo-editor { width: 100%; height: 100%; overflow: hidden; outline: none; font-size: 12pt; line-height: 1.6; white-space: pre-wrap; }
 .memo-editor:empty::before { content: attr(data-placeholder); color: #999; pointer-events: none; }

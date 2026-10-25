@@ -76,6 +76,7 @@ function createDayCell(day) {
     day.events.forEach(event => {
       const item = document.createElement('li');
       item.className = 'event-item';
+      applyEventColors(item, event.colors);
       if (event.time) {
         const time = document.createElement('span');
         time.className = 'ev-time';
@@ -111,6 +112,18 @@ function createDayCell(day) {
     cell.appendChild(list);
   }
   return cell;
+}
+
+// ★ Yahoo!カレンダーで設定された予定の色を反映（取得できなければ従来のピンク）
+function applyEventColors(item, colors) {
+  if (colors?.bg) {
+    item.classList.add('custom-color');
+    item.style.background = colors.bg;
+    item.style.borderLeftColor = colors.bg;
+    if (colors.fg) item.style.color = colors.fg;
+  } else if (colors?.accent) {
+    item.style.borderLeftColor = colors.accent;
+  }
 }
 
 function sizeMemoArea(focusEditor = true) {

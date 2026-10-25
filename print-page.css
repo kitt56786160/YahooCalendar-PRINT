@@ -30,8 +30,15 @@ h1 { flex: none; text-align: center; font-size: 15pt; font-weight: bold; color: 
 .day-cell.today .day-num { display: inline-flex; width: 18px; height: 18px; align-items: center; justify-content: center; color: #fff; background: #cc0028; border-radius: 50%; }
 .rokuyo { color: #999; font-size: 6pt; }
 .event-list { list-style: none; }
-.event-list li { overflow: hidden; margin-bottom: 1px; padding: 1px 3px; border-left: 2px solid #ff8888; border-radius: 1px; background: #fff0f0; color: #333; font-size: 7pt; line-height: 1.3; white-space: nowrap; text-overflow: ellipsis; }
+.event-list li { overflow: hidden; margin-bottom: 2px; padding: 1.5px 3px; border-left: 2px solid #ff8888; border-radius: 1px; background: #fff0f0; color: #333; font-size: 7pt; line-height: 1.25; white-space: normal; word-break: break-all; }
+.event-item.has-comment { cursor: pointer; transition: background-color 0.15s ease; }
+.event-item.has-comment:hover { background: #ffe3e8; }
+.comment-badge { font-size: 6pt; color: #cc0028; opacity: 0.75; margin-left: 2px; user-select: none; }
+.event-item.show-comment .comment-badge { opacity: 1; }
 .ev-time { margin-right: 2px; color: #cc0028; font-size: 6.5pt; font-weight: bold; }
+.ev-title { font-weight: 500; }
+.ev-comment { display: none; margin-top: 1.5px; padding-top: 1.5px; border-top: 1px dashed rgba(204, 0, 40, 0.25); color: #555; font-size: 6pt; line-height: 1.25; white-space: pre-wrap; word-break: break-all; }
+.event-item.show-comment .ev-comment { display: block !important; }
 .memo-area { display: block; flex: none; min-height: 0; overflow: hidden; }
 .memo-editor { width: 100%; height: 100%; overflow: hidden; outline: none; font-size: 12pt; line-height: 1.6; white-space: pre-wrap; }
 .memo-editor:empty::before { content: attr(data-placeholder); color: #999; pointer-events: none; }
@@ -47,4 +54,7 @@ h1 { flex: none; text-align: center; font-size: 15pt; font-weight: bold; color: 
   body { width: 190mm; margin: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .edit-bar, .context-menu { display: none !important; }
   .memo-editor:empty::before { content: ''; }
+  .comment-badge { display: none !important; }
+  .event-item.show-comment .ev-comment { display: block !important; }
+  .event-item:not(.show-comment) .ev-comment { display: none !important; }
 }

@@ -75,13 +75,37 @@ function createDayCell(day) {
     list.className = 'event-list';
     day.events.forEach(event => {
       const item = document.createElement('li');
+      item.className = 'event-item';
       if (event.time) {
         const time = document.createElement('span');
         time.className = 'ev-time';
         time.textContent = event.time;
         item.appendChild(time);
       }
-      item.appendChild(document.createTextNode(event.title));
+      const titleSpan = document.createElement('span');
+      titleSpan.className = 'ev-title';
+      titleSpan.textContent = event.title;
+      item.appendChild(titleSpan);
+
+      if (event.comment) {
+        item.classList.add('has-comment');
+        item.setAttribute('title', 'クリックでコメント全文を表示/非表示');
+
+        const badge = document.createElement('span');
+        badge.className = 'comment-badge';
+        badge.textContent = ' 💬';
+        item.appendChild(badge);
+
+        const commentDiv = document.createElement('div');
+        commentDiv.className = 'ev-comment';
+        commentDiv.textContent = event.comment;
+        item.appendChild(commentDiv);
+
+        item.addEventListener('click', () => {
+          item.classList.toggle('show-comment');
+          sizeMemoArea(false);
+        });
+      }
       list.appendChild(item);
     });
     cell.appendChild(list);
@@ -134,6 +158,25 @@ function bindEditor() {
   lineHeightSelect.addEventListener('change', changeLineHeight);
   rowHeightSlider.addEventListener('input', previewCalendarRowHeight);
   rowHeightSlider.addEventListener('change', confirmCalendarRowHeight);
+
+  const btnExpandComments = document.getElementById('btn-expand-comments');
+  if (btnExpandComments) {
+    btnExpandComments.addEventListener('click', () => {
+      document.querySelectorAll('.event-item.has-comment').forEach(item => {
+        item.classList.add('show-comment');
+      });
+      sizeMemoArea(false);
+    });
+  }
+  const btnCollapseComments = document.getElementById('btn-collapse-comments');
+  if (btnCollapseComments) {
+    btnCollapseComments.addEventListener('click', () => {
+      document.querySelectorAll('.event-item.has-comment').forEach(item => {
+        item.classList.remove('show-comment');
+      });
+      sizeMemoArea(false);
+    });
+  }
   bindContextMenu();
 }
 

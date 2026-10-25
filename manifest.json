@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Yahoo!カレンダー印刷",
-  "version": "2.2",
+  "version": "2.5",
   "description": "Yahoo!カレンダーの月表示をA4用紙に見やすく印刷し、下側にメモ欄を作成します。",
   "permissions": ["activeTab", "scripting", "storage", "clipboardRead"],
   "optional_permissions": ["clipboardWrite"],
@@ -11,7 +11,17 @@
     "default_icon": { "16": "icon16.png", "48": "icon48.png" }
   },
   "content_scripts": [
-    { "matches": ["https://calendar.yahoo.co.jp/*"], "css": ["print.css"], "run_at": "document_end" }
+    {
+      "matches": ["https://calendar.yahoo.co.jp/*"],
+      "js": ["interceptor.js"],
+      "world": "MAIN",
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://calendar.yahoo.co.jp/*"],
+      "css": ["print.css"],
+      "run_at": "document_end"
+    }
   ],
   "icons": { "16": "icon16.png", "48": "icon48.png" }
 }
